@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\flights;
 use App\partners;
+use App\reservation;
+use Auth;
 
 class MainController extends Controller
 {
@@ -21,8 +23,9 @@ class MainController extends Controller
 
     public function Categories()
     {
+        $user_reservation = reservation::where('user_id','=',Auth::id())->get();
         $show=flights::all();
-        return view('categories',compact('show'));
+        return view('categories',compact('show','user_reservation'));
     }
 
     public function Users()
@@ -77,4 +80,38 @@ class MainController extends Controller
         $ad->save();
         return redirect('/home');
     }
+
+    public function editFlight($id){
+        $flight = flights::with('partnerid')->find($id);
+        // dd($flight);
+        $pr=partners::all();
+        return view('editflight',compact('flight','pr'));
+    }
+    public function updateFlight($id){
+        $any= flights::find($id);
+        $any->Num_flight=request('Fnum');
+        $any->From=request('From');
+        $any->To=request('To');
+        $any->Price=request('Price');
+        $any->Partner=request('Part');
+        $any->Discreption=request('DIC');
+        $any->Date=request('Date');
+        $any->Time=request('Time');
+        $any->save();
+        return redirect()->back()->with('message', 'edited succussfuly');
+
+    }
+
+    public function searchFlight(Request $request){
+        $search = $request->input('searchF');
+        $show = flights::query()->where('Num_flight','LIKE',"%{$search}%")->with('partnerid')->get();
+        return view('categories',compact('show'));
+    
+    }   
+
+    public function reservation($id){
+        $user = Auth::user();
+        flights::find($id)->users()->attach($user);
+        return redirect('/home');
+    }   
 }

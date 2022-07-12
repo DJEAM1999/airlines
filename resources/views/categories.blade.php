@@ -146,6 +146,7 @@ https://templatemo.com/tm-576-snapx-photography
     <div class="container">
       <div class="row">
         <div class="col-lg-8 offset-lg-2 header-text">
+          <h2>Hello <em>{{Auth::user()->name}}</em></h2>
           <h2>See All  <em>Flights</em></h2>
           <p>You are allowed to freely use SnapX Photography Template for your commercial websites. You are not allowed to redistribute the template ZIP file on any other Free CSS websites.</p>
         </div>
@@ -154,13 +155,22 @@ https://templatemo.com/tm-576-snapx-photography
   </div>
 
   <!-- Cards -->
-  <div class="container-fluid">
+  <div class="container">
       <div class="row">
-        <div class="col-lg-6 mt-5" >
-          <div class="main-button" stayl='margin-left: 580px;'>
+        <div class="col-8 mt-5">
+          <form action="{{route('searchFlight')}}" method=get>
+          @csrf
+          <div class="input-group">
+                      <input type="search" name="searchF" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+              <button type="submit" class="btn btn-outline-primary">search</button>
+        </div>
+        </form>
+        </div>
+        <div class="col-4 mt-5" >
+          <div class="main-button" class="float-end">
             @if(Auth::user())
               @if(Auth::user()->role == "admin")
-                <a href="/add" style='margin-left: 1060px;'>ADD</a>
+                <a href="/add" class="float-end">ADD</a>
               @endif
             @endif
           </div>
@@ -173,7 +183,7 @@ https://templatemo.com/tm-576-snapx-photography
     <div class="card mb-3" >
         <div class="row ">
           <div class="col-lg-3">
-            <img src="assets/images/w2.jpg" class="img-fluid rounded-start" alt="...">
+            <img src="{{asset(Storage::url($x->partnerid->pic))}}" class="img-fluid rounded-start" alt="...">
             </div>
             <div class="col-lg-9">
               <div class="card-body">
@@ -184,12 +194,21 @@ https://templatemo.com/tm-576-snapx-photography
                   <div class="main-button">
                   @if(Auth::user())
                     @if(Auth::user()->role == "user")
-                      <a href="/flights">Reservation</a>
+                      @if($user_reservation->contains('flight_id',$x->id))
+                      <a href="">Reserved</a>
+                      @else
+                      <a href="/reservation/{{$x->id}}">Reservation</a>
+                      @endif
                     @endif
                   @endif
                     @if(Auth::user())
                       @if(Auth::user()->role == "admin")
                         <a href="/del/{{$x->id}}">DELETE</a>
+                      @endif
+                    @endif
+                    @if(Auth::user())
+                      @if(Auth::user()->role == "admin")
+                        <a href="/editFlight/{{$x->id}}">edit</a>
                       @endif
                     @endif
                   </div>

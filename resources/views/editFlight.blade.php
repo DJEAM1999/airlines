@@ -12,14 +12,14 @@
     <title>AirLines</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-snapx-photography.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="{{asset('assets/css/fontawesome.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/templatemo-snapx-photography.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/owl.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/animate.css')}}">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 <!--
 
@@ -41,7 +41,7 @@ https://templatemo.com/tm-576-snapx-photography
                   <nav class="main-nav">
                       <!-- ***** Logo Start ***** -->
                       <a href="/home" class="logo">
-                      <img src="assets/images/flight.jpg" width="5px" height="50px" alt="SnapX Photography Template">
+                      <img src="{{asset('assets/images/flight.jpg')}}" width="5px" height="50px" alt="SnapX Photography Template">
                       </a>
                       <!-- ***** Logo End ***** -->
                       <!-- ***** Menu Start ***** -->
@@ -82,7 +82,20 @@ https://templatemo.com/tm-576-snapx-photography
 
     <section class="popupBody">
         <!-- Social Login -->
-        
+        <div class="social_login">
+            <div class="">
+                <a href="#" class="social_box fb">
+                    <span class="icon"><i class="fab fa-facebook"></i></span>
+                    <span class="icon_title">Connect with Facebook</span>
+
+                </a>
+
+                <a href="#" class="social_box google">
+                    <span class="icon"><i class="fab fa-google-plus"></i></span>
+                    <span class="icon_title">Connect with Google</span>
+                </a>
+            </div>
+
             <div class="centeredText">
                 <span>Or use your Email address</span>
             </div>
@@ -149,30 +162,67 @@ https://templatemo.com/tm-576-snapx-photography
   </div>
     <section class="contact-us">
     <div class="container">
+        @if(session()->has('message'))
+        <div class="alert alert-success">
+         {{ session()->get('message') }}
+        </div>
+        @endif
     
         <div class="col-lg-12">
-          <form id="contact" action="{{Route('partner')}}" method="post" enctype="multipart/form-data">
+          <form id="contact" action="{{url('/updateflight/'.$flight->id)}}" method="post">
               @csrf
             <div class="row">
               <div class="col-lg-6">
                 <fieldset>
-                  <input type="text" name="name" id="name" placeholder="Partner Name..." autocomplete="on" required>
+                  <input type="text" name="Fnum" id="name" placeholder="Number Of Floight" value="{{$flight->Num_flight}}" autocomplete="on" required>
                 </fieldset>
               </div>
               <div class="col-lg-6">
                 <fieldset>
-                <input typ="email" name="email" id="email" placeholder="Partner Email..." required>
+                  <input type="text" name="From" value="{{$flight->From}}" id="telephone" placeholder="From..." autocomplete="on" required>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <input type="text" name="To" value="{{$flight->To}}" id="email" placeholder="To..." required>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <input type="date" name="Date" id="email" value="{{$flight->Date}}" placeholder="Date..." required>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <input type="time" name="Time" id="email" value="{{$flight->Time}}" placeholder="Time..." required>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                <input typ="float" name="Price" id="email" value="{{$flight->Price}}" placeholder="Price..." required>
                 </fieldset>
              </div>
-              <div class="col-lg-6">
+            <div class="col-lg-6">
                 <fieldset>
-                  <input type="file" name="pic" id="telephone" placeholder="partner ICO..." autocomplete="on" required>
+                  <select name="Part" class="form-control mb-3">
+                      <option value="{{$flight->partnerid->id}}">{{$flight->partnerid->name}}</option>
+                    @foreach ($pr as $p)
+                    <option value="{{$p->id}}">
+                      {{$p->name}}
+                    </option>
+                    @endforeach
+                  </select>
                 </fieldset>
               </div>
-            
+              
+              <div class="col-lg-12 ">
+                <fieldset>
+                  <textarea name="DIC" id="message" placeholder="Discreption...">{{$flight->Discreption}}</textarea>
+                </fieldset>
+              </div>
               <div class="col-lg-12">
                 <fieldset>
-                  <button type="submit" id="form-submit" class="orange-button">Add Partner</button>
+                  <button type="submit" id="form-submit" class="orange-button">Edit Flight</button>
                 </fieldset>
               </div>
               <div class="col-lg-12 mt-4">
@@ -199,14 +249,14 @@ https://templatemo.com/tm-576-snapx-photography
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 
-  <script src="assets/js/isotope.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/tabs.js"></script>
-  <script src="assets/js/popup.js"></script>
-  <script src="assets/js/custom.js"></script>
+  <script src="{{asset('assets/js/isotope.min.js')}}"></script>
+  <script src="{{asset('assets/js/owl-carousel.js')}}"></script>
+  <script src="{{asset('assets/js/tabs.js')}}"></script>
+  <script src="{{asset('assets/js/popup.js')}}"></script>
+  <script src="{{asset('assets/js/custom.js')}}"></script>
 
   </body>
 </html>

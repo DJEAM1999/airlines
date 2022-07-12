@@ -11,4 +11,8 @@ class flights extends Model
     {
         return $this->belongsTo('App\partners','Partner');
     }
+
+    public function users(){
+        return $this->belongsToMany('App\User','reservations','flight_id','user_id')->withTimestamps();
+    }
 }

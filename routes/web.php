@@ -23,6 +23,11 @@ Route::get('/addpartner','Maincontroller@partner');
 Route::post('/addpartner','Maincontroller@Addpart')->name('partner');
 Route::post('/addto','MainController@AddToDB')->name('airline');
 Route::get('/del/{id}','MainController@DelFoDB');
+Route::get('/editFlight/{id}','MainController@editFlight');
+Route::post('/updateflight/{id}','MainController@updateFlight');
+Route::get('/searchFlight','MainController@searchFlight')->name('searchFlight');
+Route::get('/reservation/{id}','MainController@reservation');
+
 
 Auth::routes();
 

@@ -129,7 +129,7 @@
                 <label>Confirm Password</label>
                 <input name="password_confirmation" type="password" id="password" />
                 <br />
-
+                
                 <div class="action_btns">
                     <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
                     <div class="one_half last"><button type="submit" class="btn btn_red">Register</button></div>
@@ -146,7 +146,7 @@
       <div class="row">
         <div class="col-lg-10 offset-lg-1">
           <div class="header-text">
-            <h2>welcome To <em>AirLines</em> <br> For The Bast Flighing Expience</h2>
+            <h2>welcome<em> {{Auth::user()->name}}</em> To <em>AirLines</em> <br> For The Bast Flighing Expience</h2>
             <div class="buttons">
               <div class="big-border-button">
                 <a href="/categories">Explore Our Flights</a>
@@ -258,7 +258,7 @@
               </div>
               <div class="right">
                 <h4>{{$x->From}} To {{$x->To}}</h4>
-                <span><em>{{$x->Num_flight}}</em>{{$x->Partner}}</span>
+                <span><em>{{$x->Num_flight}}</em></span>
               </div>
             </div>
             <div class="thumb">
