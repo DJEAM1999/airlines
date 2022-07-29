@@ -17,6 +17,7 @@ class CreatePartnersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
+            $table->string('Discreption');
             $table->string('pic')->nullable();
             $table->timestamps();
         });

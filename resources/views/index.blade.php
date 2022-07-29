@@ -48,7 +48,7 @@
                     <ul class="nav">
                         <li><a href="/home" class="active">Home</a></li>
                         <li><a href="/flights">flights</a></li>
-                        <li><a href="/users">Gallary</a></li>
+                        <li><a href="/partners">partners</a></li>
                     </ul>   
                     @if(Auth::user())
                     <div class="border-button">
@@ -146,7 +146,11 @@
       <div class="row">
         <div class="col-lg-10 offset-lg-1">
           <div class="header-text">
+            @if(Auth::user())
             <h2>welcome<em> {{Auth::user()->name}}</em> To <em>AirLines</em> <br> For The Bast Flighing Expience</h2>
+            @else
+            <h2>welcome To <em>AirLines</em> <br> For The Bast Flighing Expience</h2>
+            @endif
             <div class="buttons">
               <div class="big-border-button">
                 <a href="/categories">Explore Our Flights</a>
@@ -229,19 +233,20 @@
   <section class="popular-categories">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
           <div class="section-heading">
             <h6>Recent Flights</h6>
             
           </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-8">
           <div class="main-button">
             <a href="/flights">View All</a>
             @if(Auth::user())
               @if(Auth::user()->role == "admin")
                 <a href="/add">ADD Flight</a>
                 <a href="/addpartner">ADD Partner</a>
+                <a href="/req">Reservations Requests</a>
               @endif
             @endif
           </div>

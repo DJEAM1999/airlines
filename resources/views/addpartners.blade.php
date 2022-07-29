@@ -170,6 +170,12 @@ https://templatemo.com/tm-576-snapx-photography
                 </fieldset>
               </div>
             
+              <div class="col-lg-12 ">
+                <fieldset>
+                  <textarea name="DIC" id="message" placeholder="Discreption..."></textarea>
+                </fieldset>
+              </div>
+
               <div class="col-lg-12">
                 <fieldset>
                   <button type="submit" id="form-submit" class="orange-button">Add Partner</button>

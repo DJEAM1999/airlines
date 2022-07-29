@@ -49,7 +49,7 @@ https://templatemo.com/tm-576-snapx-photography
                           <li><a href="/home">Home</a></li>
                           
                           <li><a href="/flights">Flights</a></li>
-                          <li><a href="/gallary">Gallary</a></li>
+                          <li><a href="/partners">partners</a></li>
                       </ul>   
                       @if(Auth::user())
                     <div class="border-button">
@@ -145,11 +145,19 @@ https://templatemo.com/tm-576-snapx-photography
   <div class="page-heading">
     <div class="container">
       <div class="row">
+      @if(Auth::user())
         <div class="col-lg-8 offset-lg-2 header-text">
           <h2>Hello <em>{{Auth::user()->name}}</em></h2>
           <h2>See All  <em>Flights</em></h2>
           <p>You are allowed to freely use SnapX Photography Template for your commercial websites. You are not allowed to redistribute the template ZIP file on any other Free CSS websites.</p>
         </div>
+        @else
+        <div class="col-lg-8 offset-lg-2 header-text">
+          <h2>Hello</h2>
+          <h2>See All  <em>Flights</em></h2>
+          <p>You are allowed to freely use SnapX Photography Template for your commercial websites. You are not allowed to redistribute the template ZIP file on any other Free CSS websites.</p>
+        </div>
+        @endif
       </div>
     </div>
   </div>
@@ -165,6 +173,11 @@ https://templatemo.com/tm-576-snapx-photography
               <button type="submit" class="btn btn-outline-primary">search</button>
         </div>
         </form>
+        @if(session()->has('message'))
+        <div class="alert alert-danger mt-3">
+         {{ session()->get('message') }}
+        </div>
+        @endif
         </div>
         <div class="col-4 mt-5" >
           <div class="main-button" class="float-end">

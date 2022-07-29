@@ -48,7 +48,7 @@ https://templatemo.com/tm-576-snapx-photography
                       <ul class="nav">
                           <li><a href="/home">Home</a></li>
                           <li><a href="/flights">Flights</a></li>
-                          <li><a href="/gallary">Gallary</a></li>
+                          <li><a href="/partners">partners</a></li>
                       </ul>   
                       @if(Auth::user())
                     <div class="border-button">
@@ -174,32 +174,32 @@ https://templatemo.com/tm-576-snapx-photography
             <div class="row">
               <div class="col-lg-6">
                 <fieldset>
-                  <input type="text" name="Fnum" id="name" placeholder="Number Of Floight" value="{{$flight->Num_flight}}" autocomplete="on" required>
+                  <input type="text" name="Fnum" id="name" placeholder="Number Of Floight" value="{{$flight->Num_flight}}" autocomplete="on">
                 </fieldset>
               </div>
               <div class="col-lg-6">
                 <fieldset>
-                  <input type="text" name="From" value="{{$flight->From}}" id="telephone" placeholder="From..." autocomplete="on" required>
+                  <input type="text" name="From" value="{{$flight->From}}" id="telephone" placeholder="From..." autocomplete="on" >
                 </fieldset>
               </div>
               <div class="col-lg-6">
                 <fieldset>
-                  <input type="text" name="To" value="{{$flight->To}}" id="email" placeholder="To..." required>
+                  <input type="text" name="To" value="{{$flight->To}}" id="email" placeholder="To..." >
                 </fieldset>
               </div>
               <div class="col-lg-6">
                 <fieldset>
-                  <input type="date" name="Date" id="email" value="{{$flight->Date}}" placeholder="Date..." required>
+                  <input type="date" name="Date" id="email" value="{{$flight->Date}}" placeholder="Date..." >
                 </fieldset>
               </div>
               <div class="col-lg-6">
                 <fieldset>
-                  <input type="time" name="Time" id="email" value="{{$flight->Time}}" placeholder="Time..." required>
+                  <input type="time" name="Time" id="email" value="{{$flight->Time}}" placeholder="Time..." >
                 </fieldset>
               </div>
               <div class="col-lg-6">
                 <fieldset>
-                <input typ="float" name="Price" id="email" value="{{$flight->Price}}" placeholder="Price..." required>
+                <input typ="float" name="Price" id="email" value="{{$flight->Price}}" placeholder="Price..." >
                 </fieldset>
              </div>
             <div class="col-lg-6">

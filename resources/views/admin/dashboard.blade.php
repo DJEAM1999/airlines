@@ -47,6 +47,7 @@ https://templatemo.com/tm-576-snapx-photography
                       <!-- ***** Menu Start ***** -->
                       <ul class="nav">
                           <li><a href="/home">Home</a></li>
+                          
                           <li><a href="/flights">Flights</a></li>
                           <li><a href="/gallary">Gallary</a></li>
                       </ul>   
@@ -81,23 +82,9 @@ https://templatemo.com/tm-576-snapx-photography
     </div>
 
     <section class="popupBody">
-        <!-- Social Login -->
         <div class="social_login">
-            <div class="">
-                <a href="#" class="social_box fb">
-                    <span class="icon"><i class="fab fa-facebook"></i></span>
-                    <span class="icon_title">Connect with Facebook</span>
-
-                </a>
-
-                <a href="#" class="social_box google">
-                    <span class="icon"><i class="fab fa-google-plus"></i></span>
-                    <span class="icon_title">Connect with Google</span>
-                </a>
-            </div>
-
             <div class="centeredText">
-                <span>Or use your Email address</span>
+                <span>login // signup</span>
             </div>
 
             <div class="action_btns">
@@ -108,34 +95,29 @@ https://templatemo.com/tm-576-snapx-photography
 
         <!-- Username & Password Login form -->
         <div class="user_login">
-            <form action="" method="post">
-                <label>Email / Username</label>
-                <input name="username" type="text" id="username" />
+            <form action="{{ route('login') }}" method="post">
+              @csrf
+                <label>Email </label>
+                <input name="email" type="text" id="username" />
               <br />
 
                 <label>Password</label>
                 <input name="password" type="password" id="password" />
               <br />
 
-                <div class="checkbox">
-                    <input id="remember" type="checkbox" />
-                    <label for="remember">Remember me on this computer</label>
-                </div>
-
                 <div class="action_btns">
                     <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
                     <div class="one_half last"><button type="submit" class="btn btn_red">Login</button></div>
                 </div>
             </form>
-
-            <a href="#" class="forgot_password">Forgot password?</a>
         </div>
 
         <!-- Register Form -->
         <div class="user_register">
-            <form action="" method="post">
-                <label>Username</label>
-                <input name="username" type="text" id="username" />
+            <form action="{{ route('register') }}" method="post">
+              @csrf
+                <label>Name</label>
+                <input name="name" type="text" id="username" />
                 <br />
 
                 <label>Email Address</label>
@@ -145,11 +127,9 @@ https://templatemo.com/tm-576-snapx-photography
                 <label>Password</label>
                 <input name="password" type="password" id="password" />
                 <br />
-
-                <div class="checkbox">
-                    <input id="send_updates" type="checkbox" />
-                    <label for="send_updates">Send me occasional email updates</label>
-                </div>
+                <label>Confirm Password</label>
+                <input name="password_confirmation" type="password" id="password" />
+                <br />
 
                 <div class="action_btns">
                     <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
@@ -160,92 +140,97 @@ https://templatemo.com/tm-576-snapx-photography
         
     </section>
   </div>
-    <section class="contact-us">
+
+
+  <div class="page-heading">
     <div class="container">
-    
-        <div class="col-lg-12">
-          <form id="contact" action="{{Route('airline')}}" method="post">
-              @csrf
-            <div class="row">
-              <div class="col-lg-6">
-                <fieldset>
-                  <input type="text" name="Fnum" id="name" placeholder="Number Of Floight" autocomplete="on" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-6">
-                <fieldset>
-                  <input type="text" name="From" id="telephone" placeholder="From..." autocomplete="on" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-6">
-                <fieldset>
-                  <input type="text" name="To" id="email" placeholder="To..." required>
-                </fieldset>
-              </div>
-              <div class="col-lg-6">
-                <fieldset>
-                  <input type="date" id="dt" name="Date" id="email" placeholder="Date..." min="2018-01-01" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-6">
-                <fieldset>
-                  <input type="time" name="Time" id="email" placeholder="Time..." required>
-                </fieldset>
-              </div>
-              <div class="col-lg-6">
-                <fieldset>
-                <input typ="float" name="Price" id="email" placeholder="Price..." required>
-                </fieldset>
-             </div>
-            <div class="col-lg-6">
-                <fieldset>
-                  <select name="Part" class="form-control mb-3">
-                    @foreach ($pr as $p)
-                    <option value="{{$p->id}}">
-                      {{$p->name}}
-                    </option>
-                    @endforeach
-                  </select>
-                </fieldset>
-              </div>
-              
-              <div class="col-lg-12 ">
-                <fieldset>
-                  <textarea name="DIC" id="message" placeholder="Discreption..."></textarea>
-                </fieldset>
-              </div>
-              <div class="col-lg-12">
-                <fieldset>
-                  <button type="submit" id="form-submit" class="orange-button">Add Flight</button>
-                </fieldset>
-              </div>
-              <div class="col-lg-12 mt-4">
-                <fieldset>
-                  <a href="/home"><button type="button" id="form-submit" class="orange-button">Back</button></a>
-                </fieldset>
-              </div>
-            </div>
-          </form>
+      <div class="row">
+      @if(Auth::user())
+        <div class="col-lg-8 offset-lg-2 header-text">
+          <h2>Hello <em>{{Auth::user()->name}}</em></h2>
+          <h2>See All  <em>Flights</em></h2>
+          <p>You are allowed to freely use SnapX Photography Template for your commercial websites. You are not allowed to redistribute the template ZIP file on any other Free CSS websites.</p>
         </div>
+        @else
+        <div class="col-lg-8 offset-lg-2 header-text">
+          <h2>Hello</h2>
+          <h2>See All  <em>Flights</em></h2>
+          <p>You are allowed to freely use SnapX Photography Template for your commercial websites. You are not allowed to redistribute the template ZIP file on any other Free CSS websites.</p>
+        </div>
+        @endif
       </div>
     </div>
-  </section>
+  </div>
 
-  <footer class="">
+  <!-- Cards -->
+  <div class="container">
+      <div class="row">
+        <div class="col-8 mt-5">
+          <form action="{{route('searchFlight')}}" method=get>
+          @csrf
+          <div class="input-group">
+                      <input type="search" name="searchF" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+              <button type="submit" class="btn btn-outline-primary">search</button>
+        </div>
+        </form>
+        </div>
+        <div class="col-4 mt-5" >
+          <div class="main-button" class="float-end">
+            @if(Auth::user())
+              @if(Auth::user()->role == "admin")
+                <a href="/add" class="float-end">ADD</a>
+              @endif
+            @endif
+          </div>
+        </div>
+      </div>
+   </div>
+
+  @foreach($show as $x)
+    @foreach($flight as $f)
+  <div class="container mt-5">
+    <div class="card mb-3" >
+        <div class="row ">
+          <div class="col-lg-3">
+            <img src="{{asset(Storage::url($x->partnerid->pic))}}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-lg-9">
+              <div class="card-body">
+                @if(Auth::user()->role == 'admin')
+                <h5 class="card-title">{{$x->name}}</h5>
+                <p class="card-text">{{$x->email}}</p>
+                <p class="card-text"><small class="text-muted">Time:- </small></p>
+                @endif
+                <div class="col-lg-6">
+                  <div class="main-button">
+                      <a href="">Reserved</a>
+                      <a href="/reservation/{{$x->id}}">Reservation</a>
+                     
+                        <a href="/del/{{$x->id}}">DELETE</a>
+                     
+                        <a href="/editFlight/{{$x->id}}">edit</a>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    @endforeach
+   @endforeach
+
+   <footer>
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <p>Copyright © 2022 
+          <p>Copyright © 2022 </p> 
+          
         </div>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
-  <script>
-    document.getElementById('dt').min = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
-
-  </script>
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

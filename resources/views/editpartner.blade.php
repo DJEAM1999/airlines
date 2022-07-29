@@ -12,14 +12,14 @@
     <title>AirLines</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-snapx-photography.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="{{asset('assets/css/fontawesome.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/templatemo-snapx-photography.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/owl.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/animate.css')}}">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 <!--
 
@@ -41,14 +41,14 @@ https://templatemo.com/tm-576-snapx-photography
                   <nav class="main-nav">
                       <!-- ***** Logo Start ***** -->
                       <a href="/home" class="logo">
-                      <img src="assets/images/flight.jpg" width="5px" height="50px" alt="SnapX Photography Template">
+                      <img src="{{asset('assets/images/flight.jpg')}}" width="5px" height="50px" alt="SnapX Photography Template">
                       </a>
                       <!-- ***** Logo End ***** -->
                       <!-- ***** Menu Start ***** -->
                       <ul class="nav">
                           <li><a href="/home">Home</a></li>
                           <li><a href="/flights">Flights</a></li>
-                          <li><a href="/gallary">Gallary</a></li>
+                          <li><a href="/partners">partners</a></li>
                       </ul>   
                       @if(Auth::user())
                     <div class="border-button">
@@ -162,61 +162,42 @@ https://templatemo.com/tm-576-snapx-photography
   </div>
     <section class="contact-us">
     <div class="container">
+        @if(session()->has('message'))
+        <div class="alert alert-success">
+         {{ session()->get('message') }}
+        </div>
+        @endif
     
         <div class="col-lg-12">
-          <form id="contact" action="{{Route('airline')}}" method="post">
+          <form id="contact" action="{{url('/updatepartner/'.$par->id)}}" method="post">
               @csrf
             <div class="row">
               <div class="col-lg-6">
                 <fieldset>
-                  <input type="text" name="Fnum" id="name" placeholder="Number Of Floight" autocomplete="on" required>
+                  <input type="text" name="name" id="name" placeholder="Number Of Floight" value="{{$par->name}}" autocomplete="on" >
                 </fieldset>
               </div>
+
               <div class="col-lg-6">
                 <fieldset>
-                  <input type="text" name="From" id="telephone" placeholder="From..." autocomplete="on" required>
+                  <input type="text" name="email" value="{{$par->email}}" id="email" placeholder="email..." >
                 </fieldset>
               </div>
+
               <div class="col-lg-6">
                 <fieldset>
-                  <input type="text" name="To" id="email" placeholder="To..." required>
+                  <input type="file" name="pic" id="telephone" placeholder="partner ICO..." autocomplete="on">
                 </fieldset>
               </div>
-              <div class="col-lg-6">
-                <fieldset>
-                  <input type="date" id="dt" name="Date" id="email" placeholder="Date..." min="2018-01-01" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-6">
-                <fieldset>
-                  <input type="time" name="Time" id="email" placeholder="Time..." required>
-                </fieldset>
-              </div>
-              <div class="col-lg-6">
-                <fieldset>
-                <input typ="float" name="Price" id="email" placeholder="Price..." required>
-                </fieldset>
-             </div>
-            <div class="col-lg-6">
-                <fieldset>
-                  <select name="Part" class="form-control mb-3">
-                    @foreach ($pr as $p)
-                    <option value="{{$p->id}}">
-                      {{$p->name}}
-                    </option>
-                    @endforeach
-                  </select>
-                </fieldset>
-              </div>
-              
+
               <div class="col-lg-12 ">
                 <fieldset>
-                  <textarea name="DIC" id="message" placeholder="Discreption..."></textarea>
+                  <textarea name="DIC" id="message" placeholder="Discreption...">{{$par->Discreption}}</textarea>
                 </fieldset>
               </div>
               <div class="col-lg-12">
                 <fieldset>
-                  <button type="submit" id="form-submit" class="orange-button">Add Flight</button>
+                  <button type="submit" id="form-submit" class="orange-button">Edit Partner</button>
                 </fieldset>
               </div>
               <div class="col-lg-12 mt-4">
@@ -242,19 +223,15 @@ https://templatemo.com/tm-576-snapx-photography
   </footer>
 
   <!-- Scripts -->
-  <script>
-    document.getElementById('dt').min = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
-
-  </script>
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 
-  <script src="assets/js/isotope.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/tabs.js"></script>
-  <script src="assets/js/popup.js"></script>
-  <script src="assets/js/custom.js"></script>
+  <script src="{{asset('assets/js/isotope.min.js')}}"></script>
+  <script src="{{asset('assets/js/owl-carousel.js')}}"></script>
+  <script src="{{asset('assets/js/tabs.js')}}"></script>
+  <script src="{{asset('assets/js/popup.js')}}"></script>
+  <script src="{{asset('assets/js/custom.js')}}"></script>
 
   </body>
 </html>
